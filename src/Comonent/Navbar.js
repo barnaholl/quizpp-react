@@ -18,7 +18,6 @@ const NavBarHeader = styled.header`
   padding: 1rem;
   background-color: #2b2b2b;
   display: flex;
-  width: 99.9vw;
   flex-direction: row;
   margin: 0;
 `;

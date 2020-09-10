@@ -30,12 +30,9 @@ const Games = () => {
   );
 };
 const Grid = styled.div`
-  background: gray;
-  position: relative;
-  max-width: 90%;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-  grid-template-rows: minmax(50px, auto);
+  align-items: center;
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
   grid-gap: 10px;
   margin: 5%px;
 `;
