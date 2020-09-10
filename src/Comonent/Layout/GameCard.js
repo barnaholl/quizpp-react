@@ -12,7 +12,8 @@ const GameCard = (props) => {
 };
 
 const cardStyle = {
-  width: "30rem",
+  maxWidth: "1fr",
+  minWidth:"20rem",
   height: "20rem",
   backgroundColor: "dimgrey",
   border: "1px solid darkgoldenrod",
