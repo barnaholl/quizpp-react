@@ -14,7 +14,7 @@ const App = () => {
     <Navbar/>
     <Route exact path="/" component={Home} />
     <Route exact path="/games" component={Games} />
-    <Route exact path="/playSoloGame" component={PlaySoloGame} />
+    <Route exact path="/playSoloGame/:gameId" component={PlaySoloGame} />
   </Router>)
   
 }
