@@ -12,7 +12,7 @@ const GameCard = (props) => {
       <h2>{TAG} {game.tag}</h2>
       <h2>{DESCRIPTION}</h2>
       <h3>{game.description}</h3>
-      <Link style={playButtonContainerStyle} to="/">Play</Link>
+      <Link style={playButtonContainerStyle} to="/PlaySoloGame">Play</Link>
       
 
     </div>
@@ -20,7 +20,7 @@ const GameCard = (props) => {
 };
 
 const cardStyle = {
-  maxWidth: "1fr",
+  maxWidth: "30rem",
   minWidth:"20rem",
   height: "25rem",
   backgroundColor: "dimgrey",
