@@ -5,7 +5,7 @@ import styled from "styled-components";
 
 const Games = () => {
   const title = "Games";
-  const getGamesURI="http://localhost:8762/game-handler/game"
+  const getGamesURI="http://localhost:8762/game-handler/"
 
   const [games, setGames] = useState(null);
 
