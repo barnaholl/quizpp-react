@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import {Link} from "react-router-dom";
+
 
 const PlaySoloGame = (props) => {
     let gameId=props.match.params.gameId; 
@@ -11,8 +13,8 @@ const PlaySoloGame = (props) => {
 
     const [game,setGame] = useState();
 
-    const [question,setQuestion] = useState();
-    const [questionCouner,setQuestionCounter] = useState(0);
+    //const [question,setQuestion] = useState();
+    //const [questionCouner,setQuestionCounter] = useState(0);
 
     // useEffect(() => {
     //     axios.get(`http://localhost:8762/question-handler/${gameTag}/${gameDifficulty}`)
@@ -33,18 +35,13 @@ const PlaySoloGame = (props) => {
         game ?  (
             <>
                 <h1>{game.title}</h1>
-                <div className="utilityContainer">
-                <p>{questionCouner}/10</p>
+                <div>
+                    <p>Image placeholder</p>
+                    <h3>{game.description}</h3>
                 </div>
-                <div className="questionContainer">
-                    <p style={question}>question.title</p>
-                </div>
-                <div className="answerContainer">
-                    <p style={answer}>answer1</p>
-                    <p style={answer}>answer2</p>
-                    <p style={answer}>answer3</p>
-                    <p style={answer}>answer4</p>
-                </div>
+                <Link style={playButtonContainerStyle} to={{pathname:`/SoloGamePlay/${gameId}`,props:{game:game}}} >Play</Link>
+
+                
             </>
         ) 
         : 
@@ -55,20 +52,13 @@ const PlaySoloGame = (props) => {
         
     )
 }
-
-const question ={
-    fontSize:"2.5rem" 
-}
-
-const answer = {
-    backgroundColor: "blue",
-    borderRadius:"button-radius",
-    padding:"normal",
-    textAlign:"center",
-    cursor:"pointer",
+const playButtonContainerStyle = {
+    backgroundColor: "green",
+    cursor:PointerEvent,
     color:"white",
-    fontSize:"2rem" 
+    fontSize:"2rem"
   };
-  
+
+
 
 export default PlaySoloGame;

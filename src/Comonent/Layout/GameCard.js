@@ -13,9 +13,7 @@ const GameCard = (props) => {
       <h2>{TAG} {game.tag}</h2>
       <h2>{DESCRIPTION}</h2>
       <h3>{game.description}</h3>
-      <Link style={playButtonContainerStyle} to={{pathname:`/PlaySoloGame/${gameId}`,props:{game:game}}} >Play</Link>
-      
-
+      <Link style={playButtonContainerStyle} to={{pathname:`/SoloGame/${gameId}`,props:{game:game}}} >Play</Link>
     </div>
   );
 };
@@ -35,8 +33,6 @@ const playButtonContainerStyle = {
   color:"white",
   fontSize:"2rem"
 };
-
-
 
 
 export default GameCard;

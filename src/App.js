@@ -4,7 +4,8 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import Home from "./Comonent/Home";
 import Games from "./Comonent/Games"
 import Navbar from './Comonent/Navbar';
-import PlaySoloGame from './Comonent/PlaySoloGame';
+import SoloGame from "./Comonent/SoloGame";
+import SoloGamePlay from './Comonent/PlayGameModule/SoloGamePlay';
 
 
 const App = () => {
@@ -14,7 +15,8 @@ const App = () => {
     <Navbar/>
     <Route exact path="/" component={Home} />
     <Route exact path="/games" component={Games} />
-    <Route exact path="/playSoloGame/:gameId" component={PlaySoloGame} />
+    <Route exact path="/soloGame/:gameId" component={SoloGame} />
+    <Route exact path="/soloGamePlay/:gameId" component={SoloGamePlay} />
   </Router>)
   
 }
