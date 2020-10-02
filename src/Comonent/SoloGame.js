@@ -5,7 +5,7 @@ import {Link,useHistory} from "react-router-dom";
 
 
 const PlaySoloGame = (props) => {
-    let gameId=props.match.params.gameId; 
+    const gameId=props.match.params.gameId; 
 
     const [game,setGame] = useState();
 

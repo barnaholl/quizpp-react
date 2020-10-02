@@ -3,17 +3,16 @@ import axios from "axios";
 
 const SoloGamePlay = (props) =>{
 
-    const game=props.location.props.game;
+    const sessionId=props.match.params.sessionId;
 
     const [question,setQuestion] = useState();
     const [questionCouner,setQuestionCounter] = useState(0);
 
-    //let round=1;
 
     useEffect(() => {
-        axios.get(`http://localhost:8762/question-handler/${game.tag}/${game.difficulty}`)
+        axios.get(`http://localhost:8762/game-session-handler/${sessionId}`)
         .then((res) => {
-        setQuestion(res.data);      
+        console.log(res.data);      
     });
     },[]);
 
@@ -21,7 +20,7 @@ const SoloGamePlay = (props) =>{
         question ? (
             <>
             <div>
-                <h1>{game.title}</h1>
+                <h1>game title</h1>
             </div>
             <div className="utilityContainer">
                 <p>{questionCouner}/10</p>
