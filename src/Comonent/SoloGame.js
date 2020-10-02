@@ -1,27 +1,20 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import {Link} from "react-router-dom";
+import {Link,useHistory} from "react-router-dom";
+
 
 
 const PlaySoloGame = (props) => {
     let gameId=props.match.params.gameId; 
 
-    //const game=props.location.props.game;
-
-    //const gameTag=game.tag;
-    //const gameDifficulty=game.difficulty;
-
     const [game,setGame] = useState();
 
-    //const [question,setQuestion] = useState();
-    //const [questionCouner,setQuestionCounter] = useState(0);
+    const history = useHistory();
 
-    // useEffect(() => {
-    //     axios.get(`http://localhost:8762/question-handler/${gameTag}/${gameDifficulty}`)
-    //     .then((res) => {
-    //     setQuestion(res.data);      
-    // });
-    // },[gameId]);
+    const routeChange = () =>{
+      axios.post(`http://localhost:8762/game-session-handler/${game.id}/${game.tag}/${game.difficulty}`)
+      .then((res)=>{history.push(`Play/${res.data}`)});
+    }
     
     useEffect(() => {
         axios.get(`http://localhost:8762/game-handler/${gameId}`)
@@ -40,16 +33,13 @@ const PlaySoloGame = (props) => {
                     <h3>{game.description}</h3>
                 </div>
                 <Link style={playButtonContainerStyle} to={{pathname:`/SoloGamePlay/${gameId}`,props:{game:game}}} >Play</Link>
-
-                
+                <button onClick={routeChange}>Play</button>               
             </>
         ) 
         : 
         (
             <p>Loading...</p>
-        )
-
-        
+        )        
     )
 }
 const playButtonContainerStyle = {

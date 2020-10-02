@@ -17,10 +17,6 @@ const SoloGamePlay = (props) =>{
     });
     },[]);
 
-
-    console.log(game)
-    console.log(question)
-
     return(
         question ? (
             <>
@@ -31,13 +27,13 @@ const SoloGamePlay = (props) =>{
                 <p>{questionCouner}/10</p>
             </div>
             <div className="questionContainer">
-                <p style={question}>{question.question}</p>
+                <p style={questionStyle}>{question.question}</p>
             </div>
             <div className="answerContainer">
-                <p style={answer}>{question.correctAnswer}</p>
-                <p style={answer}>{question.wrongAnswer1}</p>
-                <p style={answer}>{question.wrongAnswer2}</p>
-                <p style={answer}>{question.wrongAnswer3}</p>
+                <p style={answerStyle}>{question.correctAnswer}</p>
+                <p style={answerStyle}>{question.wrongAnswer1}</p>
+                <p style={answerStyle}>{question.wrongAnswer2}</p>
+                <p style={answerStyle}>{question.wrongAnswer3}</p>
             </div>
         </>
         ) 
@@ -49,12 +45,13 @@ const SoloGamePlay = (props) =>{
     )
 }
 
-const question ={
+const questionStyle = {
     textAlign:"center",
     fontSize:"2.5rem" 
-}
 
-const answer = {
+  };
+
+const answerStyle = {
     backgroundColor: "blue",
     borderRadius:"button-radius",
     padding:"normal",

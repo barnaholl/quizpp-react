@@ -17,6 +17,7 @@ const App = () => {
     <Route exact path="/games" component={Games} />
     <Route exact path="/soloGame/:gameId" component={SoloGame} />
     <Route exact path="/soloGamePlay/:gameId" component={SoloGamePlay} />
+    <Route exact path="/soloGame/Play/:sessionId" component={SoloGamePlay} />
   </Router>)
   
 }
