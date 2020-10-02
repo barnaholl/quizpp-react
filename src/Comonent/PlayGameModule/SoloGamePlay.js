@@ -6,19 +6,37 @@ const SoloGamePlay = (props) =>{
     const sessionId=props.match.params.sessionId;
 
     const [question,setQuestion] = useState();
-    const [questionCouner,setQuestionCounter] = useState(0);
+    const [questionCounter,setQuestionCounter] = useState(0);
+    const [isActive,setIsActive]= useState(true);
 
 
     useEffect(() => {
         axios.get(`http://localhost:8762/game-session-handler/${sessionId}`)
         .then((res) => {
         setQuestionCounter(res.data.currentRound);
+        setIsActive(res.data.isActive);
         axios.get(`http://localhost:8762/question-handler/${res.data.currentQuestion}`)
         .then((res)=>{
         setQuestion(res.data)});
             
     });
     },[]);
+
+    const answeredWell = () => {
+        axios.put(`http://localhost:8762/game-session-handler/${sessionId}/${true}`)
+        .then((res)=>{
+            setIsActive(res.data.isActive)
+            if(isActive){
+                setQuestionCounter(res.data.currentRound)
+                axios.get(`http://localhost:8762/question-handler/${res.data.currentQuestion}`)
+                .then((res)=>{
+                setQuestion(res.data)})
+            }
+            else{
+                console.log("Game lost") 
+            }
+        });
+      }
 
     return(
         question ? (
@@ -27,13 +45,13 @@ const SoloGamePlay = (props) =>{
                 <h1>game title</h1>
             </div>
             <div className="utilityContainer">
-                <p>{questionCouner}/10</p>
+                <p>{questionCounter}/10</p>
             </div>
             <div className="questionContainer">
                 <p style={questionStyle}>{question.question}</p>
             </div>
             <div className="answerContainer">
-                <p style={answerStyle}>{question.correctAnswer}</p>
+                <p onClick={answeredWell} style={answerStyle}>{question.correctAnswer}</p>
                 <p style={answerStyle}>{question.wrongAnswer1}</p>
                 <p style={answerStyle}>{question.wrongAnswer2}</p>
                 <p style={answerStyle}>{question.wrongAnswer3}</p>
