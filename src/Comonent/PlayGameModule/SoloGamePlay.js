@@ -12,8 +12,10 @@ const SoloGamePlay = (props) =>{
     useEffect(() => {
         axios.get(`http://localhost:8762/game-session-handler/${sessionId}`)
         .then((res) => {
-        axios.get(`http://localhost:8762/question-handler/${res.data.tag}/${res.data.difficulty}`)
-        .then((res)=>{setQuestion(res.data)});
+        setQuestionCounter(res.data.currentRound);
+        axios.get(`http://localhost:8762/question-handler/${res.data.currentQuestion}`)
+        .then((res)=>{
+        setQuestion(res.data)});
             
     });
     },[]);
