@@ -14,7 +14,7 @@ const Games = () => {
         .then((res) => {
       setGames(res.data);
     });
-  });
+  },[]);
 
   return (
     <React.Fragment>
