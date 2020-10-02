@@ -26,37 +26,45 @@ const SoloGamePlay = (props) =>{
         axios.put(`http://localhost:8762/game-session-handler/${sessionId}/${true}`)
         .then((res)=>{
             setIsActive(res.data.isActive)
-            if(isActive){
-                setQuestionCounter(res.data.currentRound)
-                axios.get(`http://localhost:8762/question-handler/${res.data.currentQuestion}`)
-                .then((res)=>{
-                setQuestion(res.data)})
-            }
-            else{
-                console.log("Game lost") 
-            }
+            setQuestionCounter(res.data.currentRound)
+            axios.get(`http://localhost:8762/question-handler/${res.data.currentQuestion}`)
+            .then((res)=>{setQuestion(res.data)})
+        });
+      }
+      const answeredWrong = () => {
+        axios.put(`http://localhost:8762/game-session-handler/${sessionId}/${false}`)
+        .then((res)=>{
+            setIsActive(res.data.isActive)
         });
       }
 
-    return(
+    return(        
         question ? (
+            isActive ? 
+            (
             <>
-            <div>
-                <h1>game title</h1>
-            </div>
-            <div className="utilityContainer">
-                <p>{questionCounter}/10</p>
-            </div>
-            <div className="questionContainer">
-                <p style={questionStyle}>{question.question}</p>
-            </div>
-            <div className="answerContainer">
-                <p onClick={answeredWell} style={answerStyle}>{question.correctAnswer}</p>
-                <p style={answerStyle}>{question.wrongAnswer1}</p>
-                <p style={answerStyle}>{question.wrongAnswer2}</p>
-                <p style={answerStyle}>{question.wrongAnswer3}</p>
-            </div>
-        </>
+                <div>
+                    <h1>game title</h1>
+                </div>
+                <div className="utilityContainer">
+                    <p>{questionCounter}/10</p>
+                </div>
+                <div className="questionContainer">
+                    <p style={questionStyle}>{question.question}</p>
+                </div>
+                <div className="answerContainer">
+                    <p onClick={answeredWell} style={answerStyle}>{question.correctAnswer}</p>
+                    <p onClick={answeredWrong} style={answerStyle}>{question.wrongAnswer1}</p>
+                    <p onClick={answeredWrong} style={answerStyle}>{question.wrongAnswer2}</p>
+                    <p onClick={answeredWrong} style={answerStyle}>{question.wrongAnswer3}</p>
+                </div>
+            </>
+            ) 
+            : 
+            (
+                <p>Lose</p>
+            ) 
+            
         ) 
         : 
         (
