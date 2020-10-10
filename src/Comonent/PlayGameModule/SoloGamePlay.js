@@ -3,10 +3,13 @@ import axios from "axios";
 
 const SoloGamePlay = (props) =>{
 
+    const NUMBER_OF_QUESTIONS=3;
+
     const sessionId=props.match.params.sessionId;
 
     const [question,setQuestion] = useState();
     const [questionCounter,setQuestionCounter] = useState(0);
+    const [isVictory,setIsVictory]=useState(false);
     const [isActive,setIsActive]= useState(true);
 
 
@@ -23,13 +26,23 @@ const SoloGamePlay = (props) =>{
     },[]);
 
     const answeredWell = () => {
-        axios.put(`http://localhost:8762/game-session-handler/${sessionId}/${true}`)
-        .then((res)=>{
-            setIsActive(res.data.isActive)
-            setQuestionCounter(res.data.currentRound)
-            axios.get(`http://localhost:8762/question-handler/${res.data.currentQuestion}`)
-            .then((res)=>{setQuestion(res.data)})
-        });
+        if(questionCounter==NUMBER_OF_QUESTIONS){
+            axios.put(`http://localhost:8762/game-session-handler/${sessionId}/${false}`)
+                .then((res)=>{
+                    setIsActive(res.data.isActive)
+                    setIsVictory(true)
+                    console.log("Victory");
+                })
+        }
+        else{
+            axios.put(`http://localhost:8762/game-session-handler/${sessionId}/${true}`)
+                .then((res)=>{
+                    setIsActive(res.data.isActive)
+                    setQuestionCounter(res.data.currentRound)
+                    axios.get(`http://localhost:8762/question-handler/${res.data.currentQuestion}`)
+                    .then((res)=>{setQuestion(res.data)})
+                });
+        }
       }
       const answeredWrong = () => {
         axios.put(`http://localhost:8762/game-session-handler/${sessionId}/${false}`)
@@ -47,7 +60,7 @@ const SoloGamePlay = (props) =>{
                     <h1>game title</h1>
                 </div>
                 <div className="utilityContainer">
-                    <p>{questionCounter}/10</p>
+                    <p>{questionCounter}/{NUMBER_OF_QUESTIONS}</p>
                 </div>
                 <div className="questionContainer">
                     <p style={questionStyle}>{question.question}</p>
@@ -62,7 +75,15 @@ const SoloGamePlay = (props) =>{
             ) 
             : 
             (
-                <p>Lose</p>
+                isVictory ? 
+                (
+                    <p>Win</p>
+                ) 
+                : 
+                (
+                    <p>Lose</p>
+                ) 
+                
             ) 
             
         ) 
