@@ -53,7 +53,7 @@ const redirect = () => {
             </div>
 
             <div className="registration-link-container">
-                <Link to="/register" className="registration-link">
+                <Link to="/registration" className="registration-link">
                     You are not registered? Click here to sign up!
                 </Link>
             </div>

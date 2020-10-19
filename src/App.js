@@ -7,6 +7,7 @@ import Navbar from './Comonent/Navbar';
 import SoloGame from "./Comonent/SoloGame";
 import SoloGamePlay from './Comonent/PlayGameModule/SoloGamePlay';
 import Login from "./Comonent/Login";
+import Registration from './Comonent/Registration';
 
 
 const App = () => {
@@ -20,6 +21,7 @@ const App = () => {
     <Route exact path="/soloGamePlay/:gameId" component={SoloGamePlay} />
     <Route exact path="/soloGame/Play/:sessionId" component={SoloGamePlay} />
     <Route exact path="/login" component={Login} />
+    <Route exact path="/registration" component={Registration} />
   </Router>)
   
 }
