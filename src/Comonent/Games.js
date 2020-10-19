@@ -29,6 +29,7 @@ const Games = () => {
     </React.Fragment>
   );
 };
+
 const Grid = styled.div`
   display: grid;
   align-items: center;
