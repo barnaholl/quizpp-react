@@ -27,19 +27,29 @@ const SoloGamePlay = (props) =>{
             });
     },[]);
 
+    const checkGameActiviy = (isActive,gameId) =>{
+        if(!isActive){
+            axios.get(`http://localhost:8762/jwtUtils/username`,GET_CONFIG)
+            .then((result) => {
+                axios.put(`http://localhost:8762/game-handler/${gameId}/${result.data}`,POST_CONFIG)
+                .then(res=>{console.log(res.data)})                
+            });
+            axios.put(`http://localhost:8762/game-session-handler/setActive/${sessionId}/${false}`,"body",POST_CONFIG)
+            .then((result)=>{
+                console.log(result.data);
+            });
+        }
+        setIsActive(isActive);
+    }
+
     const chooseAnswer= (answer) => {
     axios.put(`http://localhost:8762/game-session-handler/${sessionId}/${answer}`,"body",POST_CONFIG)
     .then((res)=>{
-        console.log(res.data);
-        setIsActive(res.data.isActive);
+        checkGameActiviy(res.data.isActive,res.data.gameId);
         setQuestionCounter(res.data.currentRound)
         if(res.data.currentRound>NUMBER_OF_QUESTIONS){
             setIsVictory(true);
-            setIsActive(false);
-            axios.put(`http://localhost:8762/game-session-handler/setActive/${sessionId}/${false}`,"body",POST_CONFIG)
-            .then((res)=>{
-                console.log(res.data);
-            });
+            checkGameActiviy(false,res.data.gameId);
         }
         else{
             axios.get(`http://localhost:8762/question-handler/render/${res.data.currentQuestion}`,GET_CONFIG)
