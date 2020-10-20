@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import {POST_CONFIG,GET_CONFIG} from "./../Constants";
 
 
 const SoloGamePlay = (props) =>{
@@ -15,11 +16,11 @@ const SoloGamePlay = (props) =>{
     const [isActive,setIsActive]= useState(true);
 
     useEffect(() => {
-        axios.get(`http://localhost:8762/game-session-handler/${sessionId}`)
+        axios.get(`http://localhost:8762/game-session-handler/${sessionId}`,GET_CONFIG)
             .then((res) => {
                 setQuestionCounter(res.data.currentRound);
                 setIsActive(res.data.isActive);
-                 axios.get(`http://localhost:8762/question-handler/render/${res.data.currentQuestion}`)
+                 axios.get(`http://localhost:8762/question-handler/render/${res.data.currentQuestion}`,GET_CONFIG)
                     .then((res)=>{
                     setQuestion(res.data);  
                     });    
@@ -27,7 +28,7 @@ const SoloGamePlay = (props) =>{
     },[]);
 
     const chooseAnswer= (answer) => {
-    axios.put(`http://localhost:8762/game-session-handler/${sessionId}/${answer}`)
+    axios.put(`http://localhost:8762/game-session-handler/${sessionId}/${answer}`,"body",POST_CONFIG)
     .then((res)=>{
         console.log(res.data);
         setIsActive(res.data.isActive);
@@ -35,13 +36,13 @@ const SoloGamePlay = (props) =>{
         if(res.data.currentRound>NUMBER_OF_QUESTIONS){
             setIsVictory(true);
             setIsActive(false);
-            axios.put(`http://localhost:8762/game-session-handler/setActive/${sessionId}/${false}`)
+            axios.put(`http://localhost:8762/game-session-handler/setActive/${sessionId}/${false}`,"body",POST_CONFIG)
             .then((res)=>{
                 console.log(res.data);
             });
         }
         else{
-            axios.get(`http://localhost:8762/question-handler/render/${res.data.currentQuestion}`)
+            axios.get(`http://localhost:8762/question-handler/render/${res.data.currentQuestion}`,GET_CONFIG)
             .then((res)=>{setQuestion(res.data)})
         } 
 

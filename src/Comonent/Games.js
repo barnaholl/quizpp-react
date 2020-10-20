@@ -3,6 +3,7 @@ import axios from "axios";
 import GameCard from "./Layout/GameCard";
 import styled from "styled-components";
 
+
 const Games = () => {
   const title = "Games";
   const getGamesURI="http://localhost:8762/game-handler/"

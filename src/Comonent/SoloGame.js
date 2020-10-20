@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import {Link,useHistory} from "react-router-dom";
+import {POST_CONFIG,GET_CONFIG} from "./Constants";
+
 
 
 

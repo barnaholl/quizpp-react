@@ -1,11 +1,26 @@
 import React, { useEffect, useState } from "react";
 import {Link} from "react-router-dom";
+import axios from "axios";
+import {GET_CONFIG} from "./../Constants";
 
 const GameCard = (props) => {
   const TAG="Tag:";
   const DESCRIPTION="Description:";
+  const ALREADY_ENROLLED="You are already enrolled this game";
   const game = props.game;
   const gameId=game.id;
+  const isPlayerEnrolledUrl=`http://localhost:8762/jwtUtils/isUserEnrolled/${gameId}`;
+
+  const [isEnrolled,setIsEnrolled] = useState("false");
+
+
+  useEffect(() => {
+    axios.get(isPlayerEnrolledUrl,GET_CONFIG)
+        .then((res) => {
+      console.log(res.data);
+      setIsEnrolled(res.data);
+    });
+  },[]);
 
   return (
     <div style={cardStyle}>
@@ -13,7 +28,16 @@ const GameCard = (props) => {
       <h2>{TAG} {game.tag}</h2>
       <h2>{DESCRIPTION}</h2>
       <h3>{game.description}</h3>
-      <Link style={playButtonContainerStyle} to={{pathname:`/SoloGame/${gameId}`,props:{game:game}}} >Play</Link>
+      {isEnrolled ?
+      (
+        <h3>{ALREADY_ENROLLED}</h3>
+
+      )
+      :
+      (
+        <Link style={playButtonContainerStyle} to={{pathname:`/SoloGame/${gameId}`,props:{game:game}}} >Play</Link>
+      )
+      }
     </div>
   );
 };
