@@ -4,8 +4,6 @@ import {Link,useHistory} from "react-router-dom";
 import {POST_CONFIG,GET_CONFIG} from "./Constants";
 
 
-
-
 const PlaySoloGame = (props) => {
     const gameId=props.match.params.gameId; 
 
@@ -31,7 +29,7 @@ const PlaySoloGame = (props) => {
             <>
                 <h1>{game.title}</h1>
                 <div>
-                    <p>Image placeholder</p>
+                    <p>*Image placeholder*</p>
                     <h3>{game.description}</h3>
                 </div>
                 <Link style={playButtonContainerStyle} to={{pathname:`/SoloGamePlay/${gameId}`,props:{game:game}}} >Play</Link>
@@ -50,7 +48,6 @@ const playButtonContainerStyle = {
     color:"white",
     fontSize:"2rem"
   };
-
 
 
 export default PlaySoloGame;

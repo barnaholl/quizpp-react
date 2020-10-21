@@ -23,7 +23,7 @@ const Registration = () => {
     const [errorMessage,setErrorMessage]=useState("");
     const history = useHistory();
 
-    const formatDate = (date) => {	// formats a JS date to 'yyyy-mm-dd'
+    const formatDate = (date) => {
         var d = new Date(date),
             month = '' + (d.getMonth() + 1),
             day = '' + d.getDate(),
@@ -55,7 +55,6 @@ const Registration = () => {
             localStorage.setItem("token", response.token);
             redirect();
         } else {
-            console.log(response.msg);
             setErrorMessage(response.msg);
         }
     };

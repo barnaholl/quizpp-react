@@ -3,7 +3,6 @@ import axios from "axios";
 import GameCard from "./Layout/GameCard";
 import styled from "styled-components";
 
-
 const Games = () => {
   const title = "Games";
   const getGamesURI="http://localhost:8762/game-handler/"
@@ -21,10 +20,13 @@ const Games = () => {
     <React.Fragment>
       <h1>{title}</h1>
       <Grid>
-        {games ? (
+        {games ? 
+        (
           games.map((game) => <GameCard game={game} />)
-        ) : (
-          <p>Loading games</p>
+        ) 
+        :
+        (
+          <h2>Loading games</h2>
         )}
       </Grid>
     </React.Fragment>

@@ -6,7 +6,7 @@ import {GET_CONFIG} from "./../Constants";
 const GameCard = (props) => {
   const TAG="Tag:";
   const DESCRIPTION="Description:";
-  const ALREADY_ENROLLED="You are already enrolled this game";
+  const ALREADY_ENROLLED="You are already played this game.";
   const game = props.game;
   const gameId=game.id;
   const isPlayerEnrolledUrl=`http://localhost:8762/jwtUtils/isUserEnrolled/${gameId}`;
@@ -17,7 +17,6 @@ const GameCard = (props) => {
   useEffect(() => {
     axios.get(isPlayerEnrolledUrl,GET_CONFIG)
         .then((res) => {
-      console.log(res.data);
       setIsEnrolled(res.data);
     });
   },[]);

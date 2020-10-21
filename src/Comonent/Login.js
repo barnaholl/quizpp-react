@@ -15,7 +15,7 @@ const Login = () => {
     event.preventDefault();
     let params = {"username": username, "password": password};
     axios.post(userLoginUrl,params)
-    .then(res=>{console.log(res.data);checkResponse(res.data);});
+    .then(res=>{checkResponse(res.data);});
 }
 
 const checkResponse = (response) => {
@@ -23,7 +23,6 @@ const checkResponse = (response) => {
         localStorage.setItem("token", response.token);
         redirect();
     } else {
-        console.log(response.msg);
         setErrorMessage(response.msg);
     }
 };
@@ -54,7 +53,7 @@ const redirect = () => {
 
             <div className="registration-link-container">
                 <Link to="/registration" className="registration-link">
-                    You are not registered? Click here to sign up!
+                    Click here to sign up!
                 </Link>
             </div>
         </div>

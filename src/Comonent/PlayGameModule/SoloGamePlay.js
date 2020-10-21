@@ -2,9 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import {POST_CONFIG,GET_CONFIG} from "./../Constants";
 
-
 const SoloGamePlay = (props) =>{
-
 
     const NUMBER_OF_QUESTIONS=3;
 
@@ -34,10 +32,7 @@ const SoloGamePlay = (props) =>{
                 axios.put(`http://localhost:8762/game-handler/${gameId}/${result.data}`,POST_CONFIG)
                 .then(res=>{console.log(res.data)})                
             });
-            axios.put(`http://localhost:8762/game-session-handler/setActive/${sessionId}/${false}`,"body",POST_CONFIG)
-            .then((result)=>{
-                console.log(result.data);
-            });
+            axios.put(`http://localhost:8762/game-session-handler/setActive/${sessionId}/${false}`,"body",POST_CONFIG);
         }
         setIsActive(isActive);
     }
@@ -55,9 +50,8 @@ const SoloGamePlay = (props) =>{
             axios.get(`http://localhost:8762/question-handler/render/${res.data.currentQuestion}`,GET_CONFIG)
             .then((res)=>{setQuestion(res.data)})
         } 
-
-    
     });
+    
     }      
 
     return(        
