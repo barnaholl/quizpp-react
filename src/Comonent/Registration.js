@@ -43,9 +43,9 @@ const Registration = () => {
             setErrorMessage("Passwords are not identical");
         }
         else{
-            let userData={"username":username, "password":password, "roles":["ROLE_PLAYER"]};
-            let personalData={"email":email,"sex":sex,"birthDate":selectedDate,"country":country}
-            axios.post(registraitonUrl,userData)
+            let registrationData={"username":username, "password":password, "roles":["ROLE_PLAYER"],"emailAddress":email,"sex":sex,"birthDate":selectedDate,"country":country};
+            console.log(registrationData);
+            axios.post(registraitonUrl,registrationData)
             .then(res=>{checkResponse(res.data)});
         }
 

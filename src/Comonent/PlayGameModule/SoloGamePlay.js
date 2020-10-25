@@ -21,7 +21,7 @@ const SoloGamePlay = (props) =>{
                  axios.get(`http://localhost:8762/question-handler/render/${res.data.currentQuestion}`,GET_CONFIG)
                     .then((res)=>{
                     setQuestion(res.data);  
-                    });    
+                    }); 
             });
     },[]);
 

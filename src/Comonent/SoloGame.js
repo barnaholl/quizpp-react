@@ -8,7 +8,6 @@ const PlaySoloGame = (props) => {
     const gameId=props.match.params.gameId; 
 
     const [game,setGame] = useState();
-
     const history = useHistory();
 
     const routeChange = () =>{
