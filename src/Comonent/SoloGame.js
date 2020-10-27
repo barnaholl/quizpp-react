@@ -31,8 +31,7 @@ const PlaySoloGame = (props) => {
                     <p>*Image placeholder*</p>
                     <h3>{game.description}</h3>
                 </div>
-                <Link style={playButtonContainerStyle} to={{pathname:`/SoloGamePlay/${gameId}`,props:{game:game}}} >Play</Link>
-                <button onClick={routeChange}>Play</button>               
+                <button style={playButtonContainerStyle} onClick={routeChange}>Play</button>               
             </>
         ) 
         : 

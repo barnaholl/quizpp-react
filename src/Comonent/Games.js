@@ -35,10 +35,9 @@ const Games = () => {
 
 const Grid = styled.div`
   display: grid;
+  gap 1rem;
   align-items: center;
   grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
-  grid-gap: 10px;
-  margin: 5%px;
 `;
 
 export default Games;
