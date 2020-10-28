@@ -35,12 +35,12 @@ const redirect = () => {
   return (
     <div style={logingGridStyle}>
         <div style={loginCardStyle}>
-            <div className="login-text-container">
+            <div>
                 <h1>{title}</h1>
             </div>
-            <div className="form-container">
+            <div>
                 <h3>{errorMessage}</h3>
-                <form className="login-form" onSubmit={sendLoginDetails}>
+                <form onSubmit={sendLoginDetails}>
                     <label style={formInputLabelStyle}>Username</label>
                     <input type="text" style={formInputStyle} required placeholder="Username" autoComplete="off" onChange={event => setUsername(event.target.value)}/>
                     
@@ -96,6 +96,7 @@ const loginCardStyle = {
     borderRadius: "0.4rem",
     boxSizing: "border-box"
   }
+
   const formInputLabelStyle= {
     width: "100%",
     margin: "0.8rem 0",
@@ -103,6 +104,7 @@ const loginCardStyle = {
     borderRadius: "4px",
     boxSizing: "border-box"
   }
+
   const formSubmitButtonStyle= {
     maxWidth: "6rem",
     minWidth:"1fv",
@@ -114,6 +116,7 @@ const loginCardStyle = {
     borderRadius: "4px",
     cursor: "pointer",
   }
+
   const registrationLinkStyle = {
     textDecoration: "none",
     color:"black",

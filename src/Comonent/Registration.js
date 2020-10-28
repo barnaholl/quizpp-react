@@ -65,51 +65,44 @@ const Registration = () => {
     };
 
     return (
-        <div className="registration-page">
-            <div className="registration-container">
-                <div className="registration-text-container">
-                    <h2 className="registration-title">Registration</h2>
+        <div style={logingGridStyle}>
+            <div style={loginCardStyle}>
+                <div>
+                    <h2>Registration</h2>
                 </div>
-                <div className="registration-form-container">
-                    <form className="registration-form" onSubmit={sendRegistrationDetails}>
-                        <label htmlFor="registration-username-input" className="registration-label">Username</label>
-                        <input type="text" name="registration-username-input" placeholder="Type your username" className="registration-input" autoComplete="off" required onChange={event => setUsername(event.target.value)}/>
-                        <br></br>
+                <div>
+                    <form onSubmit={sendRegistrationDetails}>
+                        <label style={formInputLabelStyle}>Username</label>
+                        <input style={formInputStyle} type="text" placeholder="Type your username"  autoComplete="off" required onChange={event => setUsername(event.target.value)}/>
                         
-                        <label htmlFor="registration-password-input" className="registration-label">Password</label>
-                        <input type="password" name="registration-password-input" placeholder="Type your password" className="registration-input" autoComplete="off" required onChange={event => setPassword(event.target.value)}/>
-                        <br></br>
+                        <label style={formInputLabelStyle}>Password</label>
+                        <input style={formInputStyle} type="password" placeholder="Type your password"  autoComplete="off" required onChange={event => setPassword(event.target.value)}/>
                         
-                        <label htmlFor="registration-confirm-password-input" className="registration-label">Confirm Password</label>
-                        <input type="password" name="registration-confirm-password-input" placeholder="Confirm your password" className="registration-input" autoComplete="off" required onChange={event => setConfirmPassword(event.target.value)}/>
-                        <br></br>
+                        <label style={formInputLabelStyle}>Confirm Password</label>
+                        <input style={formInputStyle} type="password" placeholder="Confirm your password"  autoComplete="off" required onChange={event => setConfirmPassword(event.target.value)}/>
                         
-                        <label htmlFor="registration-email-input" className="registration-label">Email address</label>
-                        <input type="email" name="registration-email-input" placeholder="Type your email address" className="registration-input" autoComplete="off" required onChange={event => setEmail(event.target.value)}/>
-                        <br></br>
+                        <label style={formInputLabelStyle}>Email address</label>
+                        <input style={formInputStyle} type="email" placeholder="Type your email address" autoComplete="off" required onChange={event => setEmail(event.target.value)}/>
                         
-                        <label htmlFor="registration-sex-input" className="registration-label">Sex</label>
-                        <select>
+                        <label style={formInputLabelStyle}>Sex</label>
+                        <select style={formInputStyle}>
                             <option value="Male" onChange={event => setSex(event.target.value)}>{MALE}</option>
                             <option value="Female" onChange={event => setSex(event.target.value)}>{FEMALE}</option>
                             <option value="Other" onChange={event => setSex(event.target.value)}>{OTHER}</option>
                         </select>
-                        <br></br>
                         
-                        <label htmlFor="registration-birthdate-input" className="registration-label">Birth Date</label>
-                        <DropdownDate  selectedDate={selectedDate}
+                        <label style={formInputLabelStyle}>Birth Date</label>
+                        <DropdownDate style={formInputStyle} selectedDate={selectedDate}
                         onDateChange={(date) => {        
                             formatDate(date);
                           }}
                           >
                         </DropdownDate>
-                        <br></br>
 
-                        <label htmlFor="registration-country-input" className="registration-label">Country</label>
-                        <CountryDropdown value={country} onChange={(val) => {setCountry(val)}} />                            
-                        <br></br>
+                        <label style={formInputLabelStyle}>Country</label>
+                        <CountryDropdown style={formInputStyle} value={country} onChange={(val) => {setCountry(val)}} />                            
 
-                        <input type="submit" className="registration-button" value="Register"/>
+                        <input style={formSubmitButtonStyle} type="submit" className="registration-button" value="Register"/>
                     </form>
                         <h3>{errorMessage}</h3>
                 </div>
@@ -117,5 +110,62 @@ const Registration = () => {
         </div>
     );
 };
+
+const loginCardStyle = {
+    maxWidth: "40rem",
+    minWidth:"1fv",
+    height: "1fv",
+    display: "grid",
+    gridTemplateColumns: "1fv",
+    gridTemplateRows: "10rem 5rem, 5rem, 5rem",
+    borderRadius: "18px",
+    background: "white",
+    boxShadow:" 5px 5px 15px rgba(0,0,0,0.9)",
+    fontFamily: "roboto",
+    textAlign: "center",
+    backgroundColor: "rgb(242, 242, 242)",
+  
+  };
+
+  const logingGridStyle ={
+    display: "grid",
+    gap : "1rem",
+    alignItems: "center",
+    justifyContent: "center",
+    alignContent: "center",
+    gridTemplateColumns: "1fv",
+    gridTemplateRows: "1fv"
+  }
+
+  const formInputStyle= {
+    width: "100%",
+    padding: "1.2rem 2rem",
+    margin: "0.8rem 0",
+    display: "inline-block",
+    border: "0.1rem solid #ccc",
+    borderRadius: "0.4rem",
+    boxSizing: "border-box"
+  }
+  
+  const formInputLabelStyle= {
+    width: "100%",
+    margin: "0.8rem 0",
+    display: "inline-block",
+    borderRadius: "4px",
+    boxSizing: "border-box"
+  }
+
+  const formSubmitButtonStyle= {
+    maxWidth: "6rem",
+    minWidth:"1fv",
+    backgroundColor: "#4CAF50",
+    color: "white",
+    padding: "14px 20px",
+    margin: "8px 0",
+    border: "none",
+    borderRadius: "4px",
+    cursor: "pointer",
+  }
+
 
 export default Registration;
