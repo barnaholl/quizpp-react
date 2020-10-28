@@ -1,14 +1,28 @@
+import Axios from "axios";
 import React, { useState,useEffect } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import axios from "axios";
+import {POST_CONFIG,GET_CONFIG} from "./Constants";
+
 
 
 const Navbar = () => {
   
   const [token,setToken] = useState(null);
+  const [score,setScore]=useState();
 
   useEffect(() => {
-    setToken(localStorage.getItem("token"));   
+    setToken(localStorage.getItem("token"))   
+      axios.get("http://localhost:8762/jwtUtils/username",GET_CONFIG)
+      .then(res=>{
+        axios.get(`http://localhost:8762/user-handler/user-currency/${res.data}`,GET_CONFIG)
+        .then(res=>{
+          setScore(res.data);
+          console.log(res.data);
+        });
+      })
+      
   },[]);
 
   const logoutHandler = (event) => {
@@ -34,14 +48,14 @@ const Navbar = () => {
         )
         }
       </NavBarHeader>
-      <div></div>
+      <div><p>{score}</p></div>
       {token ? 
       (
         <div><button style={logutButtonStyle} onClick={logoutHandler}>Logout</button></div>
       )
       : 
       (
-        <div></div>
+      <div></div>
       )}
 
     </div>
