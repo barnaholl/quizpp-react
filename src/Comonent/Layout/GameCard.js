@@ -44,8 +44,7 @@ const GameCard = (props) => {
           <div>
             <h3>Placeholder</h3>
           </div>
-            <Link style={playButtonContainerStyle} to={{pathname:`/SoloGame/${gameId}`,props:{game:game}}} >Play</Link>
-
+          <button style={playButtonContainerStyle}>Play</button>               
         </div>
       )
       }
@@ -63,7 +62,7 @@ const cardStyle = {
   height: "35rem",
   display: "grid",
   gridTemplateColumns: "1fv",
-  gridTemplateRows: "15rem 17rem 3rem",
+  gridTemplateRows: "15rem 16rem 4rem",
   borderRadius: "18px",
   background: "white",
   boxShadow:" 5px 5px 15px rgba(0,0,0,0.9)",
@@ -85,7 +84,9 @@ const cardText={
 const cardStats={
   display:"grid",
   gridTemplateColumns : "2fr 1fr",
-  gridTemplateRows : "1fr",
+  gridTemplateRows : "1fv",
+  justifyContent: "center",
+  alignContent: "center",
   backgroundColor : "#2b2b2b",
   borderBottomLeftRadius:"15px",
   borderBottomRightRadius:"15px",
@@ -100,18 +101,21 @@ const gameEnrolled={
 };
 
 const playButtonContainerStyle = {
+  fontFamily: "roboto",
   backgroundColor: "#2b2b2b",
   cursor:PointerEvent,
   color:"black",
   fontSize:"1.5rem",
   textDecoration: "none",
-  backgroundSize:"cover",
-  height:"3rem",
+  textAlign:"center",
+  verticalAlign: "text-bottom",
+  height:"1fr",
   borderBottomLeftRadius:"15px",
   borderBottomRightRadius:"15px",
+  justifyContent: "center",
+  alignContent: "center",
+  border:"none"
 
 };
-
-
 
 export default GameCard;

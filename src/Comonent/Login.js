@@ -33,10 +33,10 @@ const redirect = () => {
 };
 
   return (
-    <div className="login-page">
-        <div className="login-container">
+    <div style={logingGrid}>
+        <div style={loginCardStyle}>
             <div className="login-text-container">
-                <h1 className="login-title">{title}</h1>
+                <h1>{title}</h1>
             </div>
             <div className="form-container">
                 <h3>{errorMessage}</h3>
@@ -60,5 +60,31 @@ const redirect = () => {
     </div>
     );
 };
+
+const loginCardStyle = {
+    maxWidth: "40rem", //30
+    minWidth:"1fv",
+    height: "30rem",
+    display: "grid",
+    gridTemplateColumns: "1fv",
+    gridTemplateRows: "10rem 10rem 5rem",
+    borderRadius: "18px",
+    background: "white",
+    boxShadow:" 5px 5px 15px rgba(0,0,0,0.9)",
+    fontFamily: "roboto",
+    textAlign: "center",
+    backgroundColor: "rgb(242, 242, 242)",
+  
+  };
+
+  const logingGrid ={
+    display: "grid",
+    gap : "1rem",
+    alignItems: "center",
+    justifyContent: "center",
+    alignContent: "center",
+    gridTemplateColumns: "1fv",
+    gridTemplateRows: "1fv"
+  }
 
 export default Login;
