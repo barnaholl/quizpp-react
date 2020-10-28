@@ -8,6 +8,7 @@ import SoloGame from "./Comonent/SoloGame";
 import SoloGamePlay from './Comonent/PlayGameModule/SoloGamePlay';
 import Login from "./Comonent/Login";
 import Registration from './Comonent/Registration';
+import Profile from './Comonent/Profile';
 
 
 const App = () => {
@@ -22,6 +23,7 @@ const App = () => {
     <Route exact path="/soloGame/Play/:sessionId" component={SoloGamePlay} />
     <Route exact path="/login" component={Login} />
     <Route exact path="/registration" component={Registration} />
+    <Route exact path="/profile" component={Profile} />
   </Router>)
   
 }

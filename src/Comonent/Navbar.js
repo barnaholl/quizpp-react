@@ -1,14 +1,32 @@
-import React from "react";
+import React, { useState,useEffect } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
+
 const Navbar = () => {
+  
+  const [token,setToken] = useState(null);
+
+  useEffect(() => {
+    setToken(localStorage.getItem("token"));   
+  },[]);
+
   return (
+
     <div>
       <NavBarHeader>
         <MyLink to={"/"}>Home</MyLink>
         <MyLink to={"/games"}>Games</MyLink>
-        <MyLink to={"/login"}>Login</MyLink>
+        {token ?
+        (
+          <MyLink to={"/profile"}>Profile</MyLink>
+        )
+        :
+        (
+          <MyLink to={"/login"}>Login</MyLink>
+
+        )
+        }
       </NavBarHeader>
     </div>
   );
@@ -35,5 +53,6 @@ const MyLink = styled(Link)`
   }
   font-size: 1.5rem;
 `;
+
 
 export default Navbar;
