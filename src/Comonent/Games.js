@@ -17,8 +17,8 @@ const Games = () => {
   },[]);
 
   return (
-    <React.Fragment>
-      <h1>{title}</h1>
+      <div style={tileStyle}>
+        <h1>{title}</h1>
       <Grid>
         {games ? 
         (
@@ -29,7 +29,8 @@ const Games = () => {
           <h2>Loading games</h2>
         )}
       </Grid>
-    </React.Fragment>
+      </div>
+
   );
 };
 
@@ -39,5 +40,9 @@ const Grid = styled.div`
   align-items: center;
   grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
 `;
+
+const tileStyle={
+  textAlign: "center"
+}
 
 export default Games;
