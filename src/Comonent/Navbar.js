@@ -37,8 +37,7 @@ const Navbar = () => {
       <div></div>
       {token ? 
       (
-      <div><button style={logutButtonStyle} onClick={logoutHandler}>Logout</button></div>
-
+        <div><button style={logutButtonStyle} onClick={logoutHandler}>Logout</button></div>
       )
       : 
       (
@@ -96,7 +95,8 @@ const logutButtonStyle = {
   borderBottomRightRadius:"15px",
   justifyContent: "center",
   alignContent: "center",
-  border:"none"
+  border:"none",
+  outline: "none"
 
 };
 
