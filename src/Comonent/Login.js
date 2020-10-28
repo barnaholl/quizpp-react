@@ -33,7 +33,7 @@ const redirect = () => {
 };
 
   return (
-    <div style={logingGrid}>
+    <div style={logingGridStyle}>
         <div style={loginCardStyle}>
             <div className="login-text-container">
                 <h1>{title}</h1>
@@ -47,12 +47,12 @@ const redirect = () => {
                     <label style={formInputLabelStyle} >Password</label>                    
                     <input type="password" style={formInputStyle} required placeholder="Password" onChange={event => setPassword(event.target.value)}/>
                     
-                    <input type="submit" className="login-button" value="Login"/>
+                    <input type="submit" style={formSubmitButtonStyle} value="Login"/>
                 </form>
             </div>
 
             <div className="registration-link-container">
-                <Link to="/registration" className="registration-link">
+                <Link to="/registration" style={registrationLinkStyle}>
                     Click here to sign up!
                 </Link>
             </div>
@@ -62,7 +62,7 @@ const redirect = () => {
 };
 
 const loginCardStyle = {
-    maxWidth: "40rem", //30
+    maxWidth: "40rem",
     minWidth:"1fv",
     height: "30rem",
     display: "grid",
@@ -77,7 +77,7 @@ const loginCardStyle = {
   
   };
 
-  const logingGrid ={
+  const logingGridStyle ={
     display: "grid",
     gap : "1rem",
     alignItems: "center",
@@ -102,6 +102,22 @@ const loginCardStyle = {
     display: "inline-block",
     borderRadius: "4px",
     boxSizing: "border-box"
+  }
+  const formSubmitButtonStyle= {
+    maxWidth: "6rem",
+    minWidth:"1fv",
+    backgroundColor: "#4CAF50",
+    color: "white",
+    padding: "14px 20px",
+    margin: "8px 0",
+    border: "none",
+    borderRadius: "4px",
+    cursor: "pointer",
+  }
+  const registrationLinkStyle = {
+    textDecoration: "none",
+    color:"black",
+    fontSize :"1.3rem"
   }
 
 export default Login;
