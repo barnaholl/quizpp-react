@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {Link} from "react-router-dom";
+import {Link,useHistory} from "react-router-dom";
 import axios from "axios";
 import {GET_CONFIG} from "./../Constants";
 
@@ -14,6 +14,7 @@ const GameCard = (props) => {
 
 
   const [isEnrolled,setIsEnrolled] = useState("false");
+  const history = useHistory();
 
 
   useEffect(() => {
@@ -22,6 +23,10 @@ const GameCard = (props) => {
       setIsEnrolled(res.data);
     });
   },[]);
+
+  const routeChange = () =>{
+    history.push(`SoloGame/${gameId}`);
+  }
 
   return (
     <div style={cardStyle}>
@@ -44,7 +49,7 @@ const GameCard = (props) => {
           <div>
             <h3>Placeholder</h3>
           </div>
-          <button style={playButtonContainerStyle}>Play</button>               
+          <button style={playButtonContainerStyle} onClick={routeChange}>Play</button>               
         </div>
       )
       }
