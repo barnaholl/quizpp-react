@@ -19,16 +19,16 @@ const Games = () => {
   return (
       <div style={tileStyle}>
         <h1>{title}</h1>
-      <Grid>
-        {games ? 
-        (
-          games.map((game) => <GameCard game={game} />)
-        ) 
-        :
-        (
-          <h2>Loading games</h2>
-        )}
-      </Grid>
+        <Grid>
+          {games ? 
+          (
+            games.map((game) => <GameCard game={game} />)
+          ) 
+          :
+          (
+            <h2>Loading games</h2>
+          )}
+        </Grid>
       </div>
 
   );

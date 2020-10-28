@@ -41,11 +41,11 @@ const redirect = () => {
             <div className="form-container">
                 <h3>{errorMessage}</h3>
                 <form className="login-form" onSubmit={sendLoginDetails}>
-                    <label htmlFor="login-username-input" className="login-label">Username</label>
-                    <input type="text" name="login-username-input" className="login-input" required placeholder="Username" autoComplete="off" onChange={event => setUsername(event.target.value)}/>
+                    <label style={formInputLabelStyle}>Username</label>
+                    <input type="text" style={formInputStyle} required placeholder="Username" autoComplete="off" onChange={event => setUsername(event.target.value)}/>
                     
-                    <label htmlFor="login-password-input" className="login-label">Password</label>
-                    <input type="password" name="login-password-input" className="login-input" required placeholder="Password" onChange={event => setPassword(event.target.value)}/>
+                    <label style={formInputLabelStyle} >Password</label>                    
+                    <input type="password" style={formInputStyle} required placeholder="Password" onChange={event => setPassword(event.target.value)}/>
                     
                     <input type="submit" className="login-button" value="Login"/>
                 </form>
@@ -67,7 +67,7 @@ const loginCardStyle = {
     height: "30rem",
     display: "grid",
     gridTemplateColumns: "1fv",
-    gridTemplateRows: "10rem 10rem 5rem",
+    gridTemplateRows: "10rem 5rem, 5rem, 5rem",
     borderRadius: "18px",
     background: "white",
     boxShadow:" 5px 5px 15px rgba(0,0,0,0.9)",
@@ -85,6 +85,23 @@ const loginCardStyle = {
     alignContent: "center",
     gridTemplateColumns: "1fv",
     gridTemplateRows: "1fv"
+  }
+
+  const formInputStyle= {
+    width: "100%",
+    padding: "1.2rem 2rem",
+    margin: "0.8rem 0",
+    display: "inline-block",
+    border: "0.1rem solid #ccc",
+    borderRadius: "0.4rem",
+    boxSizing: "border-box"
+  }
+  const formInputLabelStyle= {
+    width: "100%",
+    margin: "0.8rem 0",
+    display: "inline-block",
+    borderRadius: "4px",
+    boxSizing: "border-box"
   }
 
 export default Login;
