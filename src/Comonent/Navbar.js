@@ -1,10 +1,8 @@
-import Axios from "axios";
 import React, { useState,useEffect } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
 import {POST_CONFIG,GET_CONFIG} from "./Constants";
-
 
 
 const Navbar = () => {
@@ -39,7 +37,11 @@ const Navbar = () => {
         <MyLink to={"/games"}>Games</MyLink>
         {token ?
         (
-          <MyLink to={"/profile"}>Profile</MyLink>
+          <div>
+            <MyLink to={"/profile"}>Profile</MyLink>
+            <button style={logutButtonStyle} onClick={logoutHandler}>Logout</button>
+          </div>
+
         )
         :
         (
@@ -48,10 +50,12 @@ const Navbar = () => {
         )
         }
       </NavBarHeader>
-      <div><p>{score}</p></div>
+      <div></div>
       {token ? 
       (
-        <div><button style={logutButtonStyle} onClick={logoutHandler}>Logout</button></div>
+        <div>
+          <p style={logutButtonStyle}>Score:{score}</p>
+        </div>
       )
       : 
       (
@@ -76,7 +80,7 @@ const navbarGridStyle ={
   alignItems: "center",
   justifyContent: "center",
   alignContent: "center",
-  gridTemplateColumns: "1fr 1fr 10%",
+  gridTemplateColumns: "1fr 1fr 15%",
   gridTemplateRows: "1fv",
   backgroundColor: "#2b2b2b"
 

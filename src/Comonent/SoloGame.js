@@ -11,8 +11,14 @@ const PlaySoloGame = (props) => {
     const history = useHistory();
 
     const routeChange = () =>{
-      axios.post(`http://localhost:8762/game-session-handler/${game.id}/${game.tag}/${game.difficulty}`)
-      .then((res)=>{history.push(`Play/${res.data}`)});
+        if(localStorage.getItem("token")==null){
+            history.push("/login");
+        }
+        else{
+            axios.post(`http://localhost:8762/game-session-handler/${game.id}/${game.tag}/${game.difficulty}`)
+            .then((res)=>{history.push(`Play/${res.data}`)});
+        }
+        
     }
     
     useEffect(() => {
