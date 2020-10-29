@@ -13,7 +13,7 @@ const SoloGamePlay = (props) =>{
     const [isVictory,setIsVictory]=useState(false);
     const [isActive,setIsActive]= useState(true);
     const [roundEnd,setRoundEnd]=useState("");
-    const [timeLeft,setTimeLeft]=useState(100);
+    const [timeLeft,setTimeLeft]=useState(30);
 
 
     useEffect(() => {
@@ -64,7 +64,8 @@ const SoloGamePlay = (props) =>{
     axios.put(`http://localhost:8762/game-session-handler/${sessionId}/${answer}`,"body",POST_CONFIG)
     .then((res)=>{
         checkGameActiviy(res.data.isActive,res.data.gameId);
-        setQuestionCounter(res.data.currentRound)
+        setQuestionCounter(res.data.currentRound);
+        setRoundEnd(res.data.roundEnd);
         if(res.data.currentRound>NUMBER_OF_QUESTIONS){
             setIsVictory(true);
             checkGameActiviy(false,res.data.gameId);
@@ -72,7 +73,7 @@ const SoloGamePlay = (props) =>{
         else{
             axios.get(`http://localhost:8762/question-handler/render/${res.data.currentQuestion}`,GET_CONFIG)
             .then((res)=>{setQuestion(res.data)})
-        } 
+        }
     });
     
     }
