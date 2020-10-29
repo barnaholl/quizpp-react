@@ -12,18 +12,40 @@ const SoloGamePlay = (props) =>{
     const [questionCounter,setQuestionCounter] = useState(0);
     const [isVictory,setIsVictory]=useState(false);
     const [isActive,setIsActive]= useState(true);
+    const [roundEnd,setRoundEnd]=useState("");
+    const [timeLeft,setTimeLeft]=useState(100);
+
 
     useEffect(() => {
         axios.get(`http://localhost:8762/game-session-handler/${sessionId}`,GET_CONFIG)
             .then((res) => {
                 setQuestionCounter(res.data.currentRound);
                 setIsActive(res.data.isActive);
+                setRoundEnd(res.data.roundEnd);
+                console.log(res.data.roundEnd);
                  axios.get(`http://localhost:8762/question-handler/render/${res.data.currentQuestion}`,GET_CONFIG)
                     .then((res)=>{
                     setQuestion(res.data);  
                     }); 
             });
     },[]);
+
+    useEffect(() => {
+        
+        //console.log((currentDate.getTime()-end.getTime())/1000);
+       const interval=setInterval(() => {
+            const currentDate=new Date();
+            const end=new Date(roundEnd);
+            //const end=new Date("2020-10-29T13:54:52.229099");
+            let result=(end.getTime()-currentDate.getTime())/1000;
+            setTimeLeft(result);
+            if(result<=0){
+                console.log("over");
+            }
+       }, 1000);
+
+       return()=>clearInterval(interval);
+    },[roundEnd]);
 
     const checkGameActiviy = (isActive,gameId) =>{
         if(!isActive){
@@ -52,7 +74,8 @@ const SoloGamePlay = (props) =>{
         } 
     });
     
-    }      
+    }
+    
 
     return(        
         question ? (
@@ -62,8 +85,12 @@ const SoloGamePlay = (props) =>{
                 <div>
                     <h1>game title</h1>
                 </div>
-                <div className="utilityContainer">
-                    <p>{questionCounter}/{NUMBER_OF_QUESTIONS}</p>
+                <div style={utilityContainerStyle}>
+                    <div>
+                        <p>{questionCounter}/{NUMBER_OF_QUESTIONS}</p>
+                    </div>
+                    <div></div>
+                    <div><p>Time:{timeLeft}</p></div>
                 </div>
                 <div className="questionContainer">
                     <p style={questionStyle}>{question.question}</p>
@@ -102,7 +129,6 @@ const SoloGamePlay = (props) =>{
 const questionStyle = {
     textAlign:"center",
     fontSize:"2.5rem" 
-
   };
 
 const answerStyle = {
@@ -115,6 +141,15 @@ const answerStyle = {
     fontSize:"2rem" 
   };
   
+  const utilityContainerStyle = {
+    display: "grid",
+    gap : "1rem",
+    alignItems: "center",
+    justifyContent: "center",
+    alignContent: "center",
+    gridTemplateColumns: "15% 1fr 15%",
+    gridTemplateRows: "1fv",
+  };
 
 export default SoloGamePlay;
 
