@@ -40,7 +40,8 @@ const SoloGamePlay = (props) =>{
             let result=(end.getTime()-currentDate.getTime())/1000;
             setTimeLeft(result);
             if(result<=0){
-                console.log("over");
+                setIsActive(false);
+                axios.put(`http://localhost:8762/game-session-handler/setActive/${sessionId}/${false}`,"body",POST_CONFIG);         
             }
        }, 1000);
 
