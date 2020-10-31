@@ -44,15 +44,15 @@ const GameCard = (props) => {
           </div>
         )
         :
-      (    
-        <div style={cardStats}>
-          <div>
-            <h3>Placeholder</h3>
+        (    
+          <div style={cardStats}>
+            <div>
+              <h3>Placeholder</h3>
+            </div>
+            <button style={playButtonContainerStyle} onClick={routeChange}>Play</button>               
           </div>
-          <button style={playButtonContainerStyle} onClick={routeChange}>Play</button>               
-        </div>
-      )
-      }
+        )
+        }
       
     </div>
   );
