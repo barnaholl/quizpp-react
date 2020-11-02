@@ -1,9 +1,36 @@
 import React, { useEffect, useState } from "react";
 import {Link,useHistory} from "react-router-dom";
 import axios from "axios";
-import {GET_CONFIG} from "./../Constants";
+import {GET_CONFIG} from "../Constants";
 
 const GameCard = (props) => {
+
+  const [footerColor,setFooterColor]=useState("white");
+
+  const cardStyle = {
+    maxWidth: "30rem",
+    minWidth:"20rem",
+    height: "35rem",
+    display: "grid",
+    gridTemplateColumns: "1fv",
+    gridTemplateRows: "15rem 16rem 4rem",
+    borderRadius: "18px",
+    background: "white",
+    boxShadow:" 5px 5px 15px rgba(0,0,0,0.9)",
+    fontFamily: "roboto",
+    textAlign: "center",
+    backgroundColor: "rgb(242, 242, 242)",
+  
+  };
+
+  const gameEnrolled={
+    display:"grid",
+    gridTemplateColumns : "1fr",
+    gridTemplateRows : "1fr",
+    backgroundColor : `${footerColor}`,
+    borderBottomLeftRadius:"15px",
+    borderBottomRightRadius:"15px",
+  };
 
   const TAG="Tag:";
   const DESCRIPTION="Description:";
@@ -31,11 +58,12 @@ const GameCard = (props) => {
                 .then((res3)=>{
                     setIsSessionActive(res3.data.isActive);
                     setSessionId(res3.data.id);
+                    setFooterColor("red");
                 })
             ) 
             : 
             (
-                console.log()  
+              setFooterColor("blue")
             )
         })
         
@@ -77,26 +105,13 @@ const GameCard = (props) => {
       
     </div>
   );
+  
 };
 
 const cardHeaderBackground="/images/card-header-test.jpg";
 
 
-const cardStyle = {
-  maxWidth: "30rem",
-  minWidth:"20rem",
-  height: "35rem",
-  display: "grid",
-  gridTemplateColumns: "1fv",
-  gridTemplateRows: "15rem 16rem 4rem",
-  borderRadius: "18px",
-  background: "white",
-  boxShadow:" 5px 5px 15px rgba(0,0,0,0.9)",
-  fontFamily: "roboto",
-  textAlign: "center",
-  backgroundColor: "rgb(242, 242, 242)",
 
-};
 const cardImage={
   backgroundImage: `url(${cardHeaderBackground})`,
   borderTopLeftRadius:"15px",
@@ -117,14 +132,7 @@ const cardStats={
   borderBottomLeftRadius:"15px",
   borderBottomRightRadius:"15px",
 };
-const gameEnrolled={
-  display:"grid",
-  gridTemplateColumns : "1fr",
-  gridTemplateRows : "1fr",
-  backgroundColor : "#2b2b2b",
-  borderBottomLeftRadius:"15px",
-  borderBottomRightRadius:"15px",
-};
+
 
 const playButtonContainerStyle = {
   fontFamily: "roboto",
