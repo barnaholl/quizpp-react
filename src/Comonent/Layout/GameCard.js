@@ -10,26 +10,44 @@ const GameCard = (props) => {
   const ALREADY_ENROLLED="You have already played this game.";
   const game = props.game;
   const gameId=game.id;
-  const isPlayerEnrolledUrl=`http://localhost:8762/jwtUtils/isUserEnrolled/${gameId}`;
+  //const isPlayerEnrolledUrl=`http://localhost:8762/jwtUtils/isUserEnrolled/${gameId}`;
 
 
-  const [isEnrolled,setIsEnrolled] = useState("false");
+  const [isSessionExist,setIsSessionExist]=useState();
+  const [isSessionActive,setIsSessionActive]=useState(false);
+  const [sessionId,setSessionId]=useState();
   const history = useHistory();
 
 
   useEffect(() => {
-    axios.get(isPlayerEnrolledUrl,GET_CONFIG)
-        .then((res) => {
-      setIsEnrolled(res.data);
-    });
-  },[]);
+    axios.get("http://localhost:8762/jwtUtils/username",GET_CONFIG)
+    .then(res=>{
+        axios.get(`http://localhost:8762/user-handler/game-history/isGameSessionExistByGameIdAndUsername/${gameId}/${res.data}`,GET_CONFIG)
+        .then((res2) => {
+            setIsSessionExist(res2.data);
+            res2.data ? 
+            (
+                axios.get(`http://localhost:8762/user-handler/game-history/getSoloGameSessionByGameIdAndUsername/${gameId}/${res.data}`,GET_CONFIG)
+                .then((res3)=>{
+                    setIsSessionActive(res3.data.isActive);
+                    setSessionId(res3.data.id);
+                })
+            ) 
+            : 
+            (
+                console.log()  
+            )
+        })
+        
+});
+},[gameId]);
 
   const routeChange = () =>{
     history.push(`SoloGame/${gameId}`);
   }
 
   return (
-    <div style={cardStyle}>
+    <div style={cardStyle} onClick={routeChange}>
       <div style={cardImage}></div>
       <div style={cardText}>
         <h1>{game.title}</h1>
@@ -37,22 +55,25 @@ const GameCard = (props) => {
         <h2>{DESCRIPTION}</h2>
         <h3>{game.description}</h3>
       </div>
-        {isEnrolled ?
-        (
-          <div style={gameEnrolled}>
-            <h3>{ALREADY_ENROLLED}</h3>
-          </div>
-        )
-        :
-        (    
-          <div style={cardStats}>
-            <div>
-              <h3>Placeholder</h3>
-            </div>
-            <button style={playButtonContainerStyle} onClick={routeChange}>Play</button>               
-          </div>
-        )
-        }
+
+      <div style={gameEnrolled}>
+      {isSessionExist ? 
+                    (isSessionActive ? 
+                        (
+                            <p>In Progress</p>              
+                        )
+                        :
+                        (
+                            <p>Game over</p>
+                        )
+                    ) 
+                    : 
+                    (
+                      <p>New game</p>           
+
+                    )}
+      </div>
+
       
     </div>
   );
