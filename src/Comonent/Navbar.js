@@ -67,7 +67,8 @@ const Navbar = () => {
 };
 
 const NavBarHeader = styled.header`
-  width: 1fr,
+  width: 1fr;
+  height: 2.5rem;
   padding: 1rem;
   background-color: #2b2b2b;
   display: flex;

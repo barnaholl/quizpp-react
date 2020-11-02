@@ -5,6 +5,7 @@ import {POST_CONFIG,GET_CONFIG} from "./../Constants";
 const SoloGamePlay = (props) =>{
 
     const NUMBER_OF_QUESTIONS=3;
+    const SCORE=10;
 
     const sessionId=props.match.params.sessionId;
 
@@ -38,8 +39,8 @@ const SoloGamePlay = (props) =>{
             let result=(end.getTime()-currentDate.getTime())/1000;
             setTimeLeft(result);
             if(result<=0){
-                //setIsActive(false);
-                //axios.put(`http://localhost:8762/game-session-handler/setActive/${sessionId}/${false}`,"body",POST_CONFIG);         
+                setIsActive(false);
+                axios.put(`http://localhost:8762/game-session-handler/setActive/${sessionId}/${false}`,"body",POST_CONFIG);         
             }
        }, 1000);
 
@@ -57,6 +58,12 @@ const SoloGamePlay = (props) =>{
     .then((res)=>{
         if(res.data.currentRound>NUMBER_OF_QUESTIONS){
             setGameActiviy(false,true);
+            axios.get("http://localhost:8762/jwtUtils/username",GET_CONFIG)
+            .then(res=>{
+                axios.put(`http://localhost:8762/user-handler/user-currency/${res.data}/${SCORE}`,"body",GET_CONFIG);
+                window.location.reload();
+                
+            });
         }
         else{
             setGameActiviy(res.data.isActive,false);
@@ -150,7 +157,6 @@ const questionStyle = {
 
 const answerStyle = {
     width: "1fr",
-    //minWidth:"1fr",
     height: "8rem",
     backgroundColor: "blue",
     borderRadius:"button-radius",
@@ -166,11 +172,7 @@ const answerStyle = {
     height: "18rem",
     display: "grid",
     gap : "1rem",
-    //alignItems: "center",
-    //justifyContent: "center",
-    //alignContent: "center",
     gridTemplateColumns: "repeat(auto-fit, minmax(30rem, 1fr))",
-    //gridTemplateRows: "10rem",
   };
   
   const utilityContainerStyle = {
