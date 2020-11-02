@@ -61,10 +61,8 @@ const GameCard = (props) => {
                     setIsSessionActive(res3.data.isActive);
                     setSessionId(res3.data.id);
                     setIsGameWon(res3.data.isGameWon);
-                    console.log(res3.data.isGameWon);
                     setNumberOfAnswers(res3.data.answeredQuestions.length);
-                    res3.data.isGameWon ? setFooterColor("green") : setFooterColor("red");
-                    
+                    res3.data.isGameWon ? setFooterColor("green") : setFooterColor("red");                   
                 })
             ) 
             : 

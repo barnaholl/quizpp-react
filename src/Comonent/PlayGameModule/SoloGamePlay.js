@@ -38,8 +38,8 @@ const SoloGamePlay = (props) =>{
             let result=(end.getTime()-currentDate.getTime())/1000;
             setTimeLeft(result);
             if(result<=0){
-                setIsActive(false);
-                axios.put(`http://localhost:8762/game-session-handler/setActive/${sessionId}/${false}`,"body",POST_CONFIG);         
+                //setIsActive(false);
+                //axios.put(`http://localhost:8762/game-session-handler/setActive/${sessionId}/${false}`,"body",POST_CONFIG);         
             }
        }, 1000);
 
@@ -70,11 +70,13 @@ const SoloGamePlay = (props) =>{
     }
     
 
-    return(        
+    return( 
+
         question ? (
             isActive ? 
             (
-            <>
+            <div style={gameContainerStyle}>
+
                 <div>
                     <h1>game title</h1>
                 </div>
@@ -89,13 +91,22 @@ const SoloGamePlay = (props) =>{
                     <p style={questionStyle}>{question.question}</p>
                 </div>
                 
-                <div className="answerContainer">
-                    <p onClick={()=>chooseAnswer(question.answer1)} style={answerStyle}>{question.answer1}</p>
-                    <p onClick={()=>chooseAnswer(question.answer2)} style={answerStyle}>{question.answer2}</p>
-                    <p onClick={()=>chooseAnswer(question.answer3)} style={answerStyle}>{question.answer3}</p>
-                    <p onClick={()=>chooseAnswer(question.answer4)} style={answerStyle}>{question.answer4}</p>
+                <div style={answerContainerStyle}>
+                    <div style={answerStyle}>
+                        <p onClick={()=>chooseAnswer(question.answer1)} >{question.answer1}</p>
+                    </div>
+                    <div style={answerStyle}>
+                        <p onClick={()=>chooseAnswer(question.answer2)} >{question.answer2}</p> 
+                    </div>
+                    <div style={answerStyle}>
+                        <p onClick={()=>chooseAnswer(question.answer3)} >{question.answer3}</p>
+                    </div>
+                    <div style={answerStyle}>
+                        <p onClick={()=>chooseAnswer(question.answer4)} >{question.answer4}</p>
+                    </div>
                 </div>
-            </>
+            </div>
+
             ) 
             : 
             (
@@ -114,9 +125,22 @@ const SoloGamePlay = (props) =>{
         : 
         (
             <h1>Loading question</h1>
-        ) 
+        )
+
 
     )
+
+}
+const gameContainerStyle = {
+    width: "1fr",
+    display: "grid",
+    gridTemplateColumns: "1fr",
+    gridTemplateRows: "5rem 5rem 10rem 20rem",
+    background: "white",
+    boxShadow:" 5px 5px 15px rgba(0,0,0,0.9)",
+    fontFamily: "roboto",
+    textAlign: "center",
+    backgroundColor: "rgb(242, 242, 242)",
 }
 
 const questionStyle = {
@@ -125,13 +149,28 @@ const questionStyle = {
   };
 
 const answerStyle = {
+    width: "1fr",
+    //minWidth:"1fr",
+    height: "8rem",
     backgroundColor: "blue",
     borderRadius:"button-radius",
     padding:"normal",
     textAlign:"center",
     cursor:"pointer",
     color:"white",
-    fontSize:"2rem" 
+    fontSize:"3rem" 
+  };
+
+  const answerContainerStyle = {
+    width: "1fr",
+    height: "18rem",
+    display: "grid",
+    gap : "1rem",
+    //alignItems: "center",
+    //justifyContent: "center",
+    //alignContent: "center",
+    gridTemplateColumns: "repeat(auto-fit, minmax(30rem, 1fr))",
+    //gridTemplateRows: "10rem",
   };
   
   const utilityContainerStyle = {
@@ -140,8 +179,8 @@ const answerStyle = {
     alignItems: "center",
     justifyContent: "center",
     alignContent: "center",
-    gridTemplateColumns: "15% 1fr 15%",
-    gridTemplateRows: "1fv",
+    gridTemplateColumns: "1fr 1fr 1fr",
+    gridTemplateRows: "1fr",
   };
 
 export default SoloGamePlay;

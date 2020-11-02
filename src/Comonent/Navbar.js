@@ -37,11 +37,11 @@ const Navbar = () => {
         <MyLink to={"/games"}>Games</MyLink>
         {token ?
         (
-          <div>
+          <>
             <MyLink to={"/profile"}>Profile</MyLink>
             <button style={logutButtonStyle} onClick={logoutHandler}>Logout</button>
-          </div>
-
+        
+          </>
         )
         :
         (
@@ -67,6 +67,7 @@ const Navbar = () => {
 };
 
 const NavBarHeader = styled.header`
+  width: 1fr,
   padding: 1rem;
   background-color: #2b2b2b;
   display: flex;
@@ -75,13 +76,14 @@ const NavBarHeader = styled.header`
 `;
 
 const navbarGridStyle ={
+  width: "1fr",
   display: "grid",
   gap : "1rem",
   alignItems: "center",
   justifyContent: "center",
   alignContent: "center",
-  gridTemplateColumns: "1fr 1fr 15%",
-  gridTemplateRows: "1fv",
+  gridTemplateColumns: "1fr 1fr 1fr",
+  gridTemplateRows: "1fr",
   backgroundColor: "#2b2b2b"
 
 }
@@ -106,6 +108,8 @@ const logutButtonStyle = {
   fontSize:"1.5rem",
   fontWeight: "bold",
   textDecoration: "none",
+  textTransform: 'uppercase',
+  fontWeight: "bold",
   textAlign:"center",
   verticalAlign: "text-bottom",
   height:"1fv",
@@ -115,7 +119,6 @@ const logutButtonStyle = {
   alignContent: "center",
   border:"none",
   outline: "none"
-
 };
 
 
