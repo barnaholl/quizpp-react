@@ -10,10 +10,15 @@ const PlaySoloGame = (props) => {
     const [game,setGame] = useState();
     const history = useHistory();
     const [isSessionExist,setIsSessionExist]=useState();
+    const [isSessionActive,setIsSessionActive]=useState(false);
+    const [sessionId,setSessionId]=useState();
 
     const routeChange = () =>{
         if(localStorage.getItem("token")==null){
             history.push("/login");
+        }
+        if(isSessionActive){
+            history.push(`Play/${sessionId}`);
         }
         else{
             axios.get("http://localhost:8762/jwtUtils/username",GET_CONFIG)
@@ -36,9 +41,20 @@ const PlaySoloGame = (props) => {
         axios.get("http://localhost:8762/jwtUtils/username",GET_CONFIG)
         .then(res=>{
             axios.get(`http://localhost:8762/user-handler/game-history/isGameSessionExistByGameIdAndUsername/${gameId}/${res.data}`,GET_CONFIG)
-            .then((res) => {
-                setIsSessionExist(res.data);
-                res.data ? console.log("true") : console.log("false");  
+            .then((res2) => {
+                setIsSessionExist(res2.data);
+                res2.data ? 
+                (
+                    axios.get(`http://localhost:8762/user-handler/game-history/getSoloGameSessionByGameIdAndUsername/${gameId}/${res.data}`,GET_CONFIG)
+                    .then((res3)=>{
+                        setIsSessionActive(res3.data.isActive);
+                        setSessionId(res3.data.id);
+                    })
+                ) 
+                : 
+                (
+                    console.log()  
+                )
             })
             
     });
@@ -53,8 +69,21 @@ const PlaySoloGame = (props) => {
                     <p>*Image placeholder*</p>
                     <h3>{game.description}</h3>
                 </div>
-                {isSessionExist ? (<p>SessionExist</p>) : (<p>SessionDoesNotExist</p>)}
-                <button style={playButtonContainerStyle} onClick={routeChange}>Play</button>               
+                {isSessionExist ? 
+                    (isSessionActive ? 
+                        (
+                            <button style={playButtonContainerStyle} onClick={routeChange}>Play</button>               
+                        )
+                        :
+                        (
+                            <p>*Score placeholder*</p>
+                        )
+                    ) 
+                    : 
+                    (
+                        <button style={playButtonContainerStyle} onClick={routeChange}>Play</button>               
+
+                    )}
             </>
         ) 
         : 
