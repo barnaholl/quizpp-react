@@ -17,7 +17,7 @@ const PlaySoloGame = (props) => {
         if(localStorage.getItem("token")==null){
             history.push("/login");
         }
-        if(isSessionActive){
+        else if(isSessionActive){
             history.push(`Play/${sessionId}`);
         }
         else{

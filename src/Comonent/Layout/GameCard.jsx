@@ -5,7 +5,7 @@ import {GET_CONFIG} from "../Constants";
 
 const GameCard = (props) => {
 
-  const [footerColor,setFooterColor]=useState("white");
+  const [footerColor,setFooterColor]=useState("#2b2b2b");
 
   const cardStyle = {
     maxWidth: "30rem",
@@ -35,12 +35,15 @@ const GameCard = (props) => {
   const TAG="Tag:";
   const DESCRIPTION="Description:";
   const ALREADY_ENROLLED="You have already played this game.";
+  const NUMBER_OF_QUESTIONS=3;
   const game = props.game;
   const gameId=game.id;
 
 
   const [isSessionExist,setIsSessionExist]=useState();
   const [isSessionActive,setIsSessionActive]=useState(false);
+  const [isGameWon,setIsGameWon]=useState(false);
+  const [numberOfAnswers,setNumberOfAnswers]=useState(0);
   const [sessionId,setSessionId]=useState();
   const history = useHistory();
 
@@ -57,7 +60,11 @@ const GameCard = (props) => {
                 .then((res3)=>{
                     setIsSessionActive(res3.data.isActive);
                     setSessionId(res3.data.id);
-                    setFooterColor("red");
+                    setIsGameWon(res3.data.isGameWon);
+                    console.log(res3.data.isGameWon);
+                    setNumberOfAnswers(res3.data.answeredQuestions.length);
+                    res3.data.isGameWon ? setFooterColor("green") : setFooterColor("red");
+                    
                 })
             ) 
             : 
@@ -91,7 +98,7 @@ const GameCard = (props) => {
                         )
                         :
                         (
-                            <p>Game over</p>
+                          (isGameWon ?  <p>Success</p> : <p>Questions answered:{numberOfAnswers}/{NUMBER_OF_QUESTIONS}</p>)     
                         )
                     ) 
                     : 
