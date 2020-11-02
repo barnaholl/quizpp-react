@@ -10,8 +10,8 @@ const SoloGamePlay = (props) =>{
 
     const [question,setQuestion] = useState();
     const [questionCounter,setQuestionCounter] = useState(0);
-    const [isVictory,setIsVictory]=useState(false);
     const [isActive,setIsActive]= useState(true);
+    const [isGameWon,setIsGameWon]= useState(false);
     const [roundEnd,setRoundEnd]=useState("");
     const [timeLeft,setTimeLeft]=useState(30);
 
@@ -32,11 +32,9 @@ const SoloGamePlay = (props) =>{
 
     useEffect(() => {
         
-        //console.log((currentDate.getTime()-end.getTime())/1000);
        const interval=setInterval(() => {
             const currentDate=new Date();
             const end=new Date(roundEnd);
-            //const end=new Date("2020-10-29T13:54:52.229099");
             let result=(end.getTime()-currentDate.getTime())/1000;
             setTimeLeft(result);
             if(result<=0){
@@ -48,32 +46,25 @@ const SoloGamePlay = (props) =>{
        return()=>clearInterval(interval);
     },[roundEnd]);
 
-    const checkGameActiviy = (isActive,gameId) =>{
-        if(!isActive){
-            axios.get(`http://localhost:8762/jwtUtils/username`,GET_CONFIG)
-            .then((result) => {
-                axios.put(`http://localhost:8762/game-handler/${gameId}/${result.data}`,POST_CONFIG)
-                .then(res=>{console.log(res.data)})                
-            });
-            axios.put(`http://localhost:8762/game-session-handler/setActive/${sessionId}/${false}`,"body",POST_CONFIG);
-        }
+    const setGameActiviy = (isActive,isGameWon) =>{
+        axios.put(`http://localhost:8762/game-session-handler/setActive/${sessionId}/${isActive}/${isGameWon}`,"body",POST_CONFIG);
         setIsActive(isActive);
+        setIsGameWon(isGameWon);
     }
 
     const chooseAnswer= (answer) => {
     axios.put(`http://localhost:8762/game-session-handler/${sessionId}/${answer}`,"body",POST_CONFIG)
     .then((res)=>{
-        checkGameActiviy(res.data.isActive,res.data.gameId);
-        setQuestionCounter(res.data.currentRound);
-        setRoundEnd(res.data.roundEnd);
         if(res.data.currentRound>NUMBER_OF_QUESTIONS){
-            setIsVictory(true);
-            checkGameActiviy(false,res.data.gameId);
+            setGameActiviy(false,true);
         }
         else{
+            setGameActiviy(res.data.isActive,false);
+            setQuestionCounter(res.data.currentRound);
+            setRoundEnd(res.data.roundEnd);
             axios.get(`http://localhost:8762/question-handler/render/${res.data.currentQuestion}`,GET_CONFIG)
             .then((res)=>{setQuestion(res.data)})
-        }
+        }        
     });
     
     }
@@ -108,7 +99,7 @@ const SoloGamePlay = (props) =>{
             ) 
             : 
             (
-                isVictory ? 
+                isGameWon? 
                 (
                     <p>Win</p>
                 ) 

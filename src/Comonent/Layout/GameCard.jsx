@@ -37,7 +37,6 @@ const GameCard = (props) => {
   const ALREADY_ENROLLED="You have already played this game.";
   const game = props.game;
   const gameId=game.id;
-  //const isPlayerEnrolledUrl=`http://localhost:8762/jwtUtils/isUserEnrolled/${gameId}`;
 
 
   const [isSessionExist,setIsSessionExist]=useState();
