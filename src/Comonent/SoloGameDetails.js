@@ -4,7 +4,7 @@ import {Link,useHistory} from "react-router-dom";
 import {POST_CONFIG,GET_CONFIG} from "./Constants";
 
 
-const PlaySoloGame = (props) => {
+const SoloGameDetails = (props) => {
     const gameId=props.match.params.gameId; 
 
     const [game,setGame] = useState();
@@ -63,11 +63,16 @@ const PlaySoloGame = (props) => {
         
     return(
         game ?  (
-            <>
-                <h1>{game.title}</h1>
+            <div style={soloGameDetailsStyle}>
+                <div>
+                    <h1>{game.title}</h1>
+                </div>
                 <div>
                     <p>*Image placeholder*</p>
-                    <h3>{game.description}</h3>
+                    <p>Description:{game.description}</p>
+                    <p>Difficulty:{game.difficulty}</p>
+                    <p>Tag:{game.tag}</p>
+                    <p>Type:{game.type}</p>
                 </div>
                 {isSessionExist ? 
                     (isSessionActive ? 
@@ -84,7 +89,7 @@ const PlaySoloGame = (props) => {
                         <button style={playButtonContainerStyle} onClick={routeChange}>Play</button>               
 
                     )}
-            </>
+            </div>
         ) 
         : 
         (
@@ -92,7 +97,19 @@ const PlaySoloGame = (props) => {
         )        
     )
 }
+const soloGameDetailsStyle = {
+    display: "grid",
+    gridTemplateColumns: "1fr",
+    gridTemplateRows: "15rem 16rem 5rem",
+    borderRadius: "18px",
+    background: "white",
+    fontFamily: "roboto",
+    textAlign: "center",
+  };
+
 const playButtonContainerStyle = {
+    maxWidth: "10rem",
+    minWidth:"1fr",
     backgroundColor: "green",
     cursor:PointerEvent,
     color:"white",
@@ -100,4 +117,4 @@ const playButtonContainerStyle = {
   };
 
 
-export default PlaySoloGame;
+export default SoloGameDetails;

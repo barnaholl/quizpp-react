@@ -5,7 +5,7 @@ import {GET_CONFIG} from "../Constants";
 
 const GameCard = (props) => {
 
-  const [footerColor,setFooterColor]=useState("#2b2b2b");
+  const [footerColor,setFooterColor]=useState("blue");
 
   const cardStyle = {
     maxWidth: "30rem",

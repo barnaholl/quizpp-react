@@ -23,7 +23,6 @@ const SoloGamePlay = (props) =>{
                 setQuestionCounter(res.data.currentRound);
                 setIsActive(res.data.isActive);
                 setRoundEnd(res.data.roundEnd);
-                console.log(res.data.roundEnd);
                  axios.get(`http://localhost:8762/question-handler/render/${res.data.currentQuestion}`,GET_CONFIG)
                     .then((res)=>{
                     setQuestion(res.data);  
@@ -39,8 +38,8 @@ const SoloGamePlay = (props) =>{
             let result=(end.getTime()-currentDate.getTime())/1000;
             setTimeLeft(result);
             if(result<=0){
-                setIsActive(false);
-                axios.put(`http://localhost:8762/game-session-handler/setActive/${sessionId}/${false}`,"body",POST_CONFIG);         
+                //setIsActive(false);
+                //axios.put(`http://localhost:8762/game-session-handler/setActive/${sessionId}/${false}`,"body",POST_CONFIG);         
             }
        }, 1000);
 
@@ -75,7 +74,6 @@ const SoloGamePlay = (props) =>{
     });
     
     }
-    
 
     return( 
 
@@ -99,17 +97,17 @@ const SoloGamePlay = (props) =>{
                 </div>
                 
                 <div style={answerContainerStyle}>
-                    <div style={answerStyle}>
-                        <p onClick={()=>chooseAnswer(question.answer1)} >{question.answer1}</p>
+                    <div style={answerStyle} onClick={()=>chooseAnswer(question.answer1)}>
+                        <p>{question.answer1}</p>
                     </div>
-                    <div style={answerStyle}>
-                        <p onClick={()=>chooseAnswer(question.answer2)} >{question.answer2}</p> 
+                    <div style={answerStyle} onClick={()=>chooseAnswer(question.answer2)}>
+                        <p>{question.answer2}</p> 
                     </div>
-                    <div style={answerStyle}>
-                        <p onClick={()=>chooseAnswer(question.answer3)} >{question.answer3}</p>
+                    <div style={answerStyle} onClick={()=>chooseAnswer(question.answer3)}>
+                        <p>{question.answer3}</p>
                     </div>
-                    <div style={answerStyle}>
-                        <p onClick={()=>chooseAnswer(question.answer4)} >{question.answer4}</p>
+                    <div style={answerStyle} onClick={()=>chooseAnswer(question.answer4)}>
+                        <p>{question.answer4}</p>
                     </div>
                 </div>
             </div>
@@ -172,7 +170,7 @@ const answerStyle = {
     height: "18rem",
     display: "grid",
     gap : "1rem",
-    gridTemplateColumns: "repeat(auto-fit, minmax(30rem, 1fr))",
+    gridTemplateColumns: "repeat(auto-fit, minmax(40rem, 1fr))",
   };
   
   const utilityContainerStyle = {
