@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import {POST_CONFIG,GET_CONFIG} from "./../Constants";
+import {Link,useHistory} from "react-router-dom";
+
 
 const SoloGamePlay = (props) =>{
 
@@ -13,8 +15,12 @@ const SoloGamePlay = (props) =>{
     const [questionCounter,setQuestionCounter] = useState(0);
     const [isActive,setIsActive]= useState(true);
     const [isGameWon,setIsGameWon]= useState(false);
+    const [gameId,setGameId]= useState();
     const [roundEnd,setRoundEnd]=useState("");
     const [timeLeft,setTimeLeft]=useState(30);
+
+    const history = useHistory();
+
 
 
     useEffect(() => {
@@ -23,6 +29,7 @@ const SoloGamePlay = (props) =>{
                 setQuestionCounter(res.data.currentRound);
                 setIsActive(res.data.isActive);
                 setRoundEnd(res.data.roundEnd);
+                setGameId(res.data.gameId);
                  axios.get(`http://localhost:8762/question-handler/render/${res.data.currentQuestion}`,GET_CONFIG)
                     .then((res)=>{
                     setQuestion(res.data);  
@@ -38,8 +45,10 @@ const SoloGamePlay = (props) =>{
             let result=(end.getTime()-currentDate.getTime())/1000;
             setTimeLeft(result);
             if(result<=0){
-                //setIsActive(false);
-                //axios.put(`http://localhost:8762/game-session-handler/setActive/${sessionId}/${false}`,"body",POST_CONFIG);         
+                setIsActive(false);
+                setGameActiviy(false,false);
+                history.push(`/Games`)
+                window.location.reload()
             }
        }, 1000);
 
@@ -60,6 +69,7 @@ const SoloGamePlay = (props) =>{
             axios.get("http://localhost:8762/jwtUtils/username",GET_CONFIG)
             .then(res=>{
                 axios.put(`http://localhost:8762/user-handler/user-currency/${res.data}/${SCORE}`,"body",GET_CONFIG);
+                history.push(`/Games`)
                 window.location.reload();
                 
             });
@@ -70,6 +80,10 @@ const SoloGamePlay = (props) =>{
             setRoundEnd(res.data.roundEnd);
             axios.get(`http://localhost:8762/question-handler/render/${res.data.currentQuestion}`,GET_CONFIG)
             .then((res)=>{setQuestion(res.data)})
+        }
+        if(!res.data.isActive){
+            history.push(`/Games`)
+            window.location.reload();
         }        
     });
     

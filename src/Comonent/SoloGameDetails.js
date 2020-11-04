@@ -5,6 +5,9 @@ import {POST_CONFIG,GET_CONFIG} from "./Constants";
 
 
 const SoloGameDetails = (props) => {
+
+    const NUMBER_OF_QUESTIONS=3;
+
     const gameId=props.match.params.gameId; 
 
     const [game,setGame] = useState();
@@ -12,6 +15,8 @@ const SoloGameDetails = (props) => {
     const [isSessionExist,setIsSessionExist]=useState();
     const [isSessionActive,setIsSessionActive]=useState(false);
     const [sessionId,setSessionId]=useState();
+    const [answerQuestions,setAnsweredQuestions]=useState();
+
 
     const routeChange = () =>{
         if(localStorage.getItem("token")==null){
@@ -49,6 +54,7 @@ const SoloGameDetails = (props) => {
                     .then((res3)=>{
                         setIsSessionActive(res3.data.isActive);
                         setSessionId(res3.data.id);
+                        setAnsweredQuestions(res3.data.answeredQuestions.length);
                     })
                 ) 
                 : 
@@ -81,7 +87,7 @@ const SoloGameDetails = (props) => {
                         )
                         :
                         (
-                            <p>*Score placeholder*</p>
+                            <h1>Answers:{answerQuestions}/{NUMBER_OF_QUESTIONS}</h1>  
                         )
                     ) 
                     : 

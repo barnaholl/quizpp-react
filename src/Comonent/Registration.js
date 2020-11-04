@@ -60,7 +60,7 @@ const Registration = () => {
     };
     
     const redirect = () => {
-        history.push("/");
+        history.push("/Games");
         window.location.reload();
     };
 
