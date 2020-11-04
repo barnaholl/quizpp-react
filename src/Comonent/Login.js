@@ -28,7 +28,7 @@ const checkResponse = (response) => {
 };
 
 const redirect = () => {
-    history.push("/");
+    history.push("/Games");
     window.location.reload();
 };
 

@@ -162,7 +162,7 @@ const gameContainerStyle = {
 
 const questionStyle = {
     textAlign:"center",
-    fontSize:"2.5rem" 
+    fontSize:"3rem" 
   };
 
 const answerStyle = {
@@ -195,6 +195,7 @@ const answerStyle = {
     alignContent: "center",
     gridTemplateColumns: "1fr 1fr 1fr",
     gridTemplateRows: "1fr",
+    fontSize: "3rem"
   };
 
 export default SoloGamePlay;

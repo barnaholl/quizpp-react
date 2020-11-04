@@ -92,7 +92,10 @@ const SoloGameDetails = (props) => {
                     ) 
                     : 
                     (
-                        <button style={playButtonContainerStyle} onClick={routeChange}>Play</button>               
+                        <div style={playButtonContainerStyle}>
+                            <button style={playButtonStyle} onClick={routeChange}>Play</button>
+                        </div>
+                                       
 
                     )}
             </div>
@@ -113,7 +116,13 @@ const soloGameDetailsStyle = {
     textAlign: "center",
   };
 
-const playButtonContainerStyle = {
+  const playButtonContainerStyle = {
+
+    textAlign: "center",
+
+  };
+
+const playButtonStyle = {
     maxWidth: "10rem",
     minWidth:"1fr",
     backgroundColor: "green",

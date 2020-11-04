@@ -38,9 +38,7 @@ const Navbar = () => {
         {token ?
         (
           <>
-            <MyLink to={"/profile"}>Profile</MyLink>
-            <button style={logutButtonStyle} onClick={logoutHandler}>Logout</button>
-        
+            <button style={logutButtonStyle} onClick={logoutHandler}>Logout</button>       
           </>
         )
         :
