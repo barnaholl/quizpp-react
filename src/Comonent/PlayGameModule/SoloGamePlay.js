@@ -82,8 +82,8 @@ const SoloGamePlay = (props) =>{
             (
             <div style={gameContainerStyle}>
 
-                <div>
-                    <h1>game title</h1>
+                <div className="questionContainer">
+                    <p style={questionStyle}>{question.question}</p>
                 </div>
                 <div style={utilityContainerStyle}>
                     <div>
@@ -92,9 +92,7 @@ const SoloGamePlay = (props) =>{
                     <div></div>
                     <div><p>Time:{timeLeft}</p></div>
                 </div>
-                <div className="questionContainer">
-                    <p style={questionStyle}>{question.question}</p>
-                </div>
+               
                 
                 <div style={answerContainerStyle}>
                     <div style={answerStyle} onClick={()=>chooseAnswer(question.answer1)}>
@@ -140,7 +138,7 @@ const gameContainerStyle = {
     width: "1fr",
     display: "grid",
     gridTemplateColumns: "1fr",
-    gridTemplateRows: "5rem 5rem 10rem 20rem",
+    gridTemplateRows: "5rem 16rem 1fr",
     background: "white",
     boxShadow:" 5px 5px 15px rgba(0,0,0,0.9)",
     fontFamily: "roboto",
@@ -155,7 +153,7 @@ const questionStyle = {
 
 const answerStyle = {
     width: "1fr",
-    height: "8rem",
+    height: "1fr",
     backgroundColor: "blue",
     borderRadius:"button-radius",
     padding:"normal",
@@ -167,10 +165,12 @@ const answerStyle = {
 
   const answerContainerStyle = {
     width: "1fr",
-    height: "18rem",
+    height: "1fr",
     display: "grid",
-    gap : "1rem",
+    gap : "0.5rem",
     gridTemplateColumns: "repeat(auto-fit, minmax(40rem, 1fr))",
+    //gridTemplateColumns: "repeat(auto-fit, minmax(40rem, 1fr))",
+    //gridTemplateRows: ""
   };
   
   const utilityContainerStyle = {
